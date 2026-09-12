@@ -26,8 +26,8 @@ Everything is stored **100% on-chain**, eliminating the need for centralized dat
 | **Block Explorer** | [https://scan.bohr.life](https://scan.bohr.life) |
 | **Native Token** | `BOT` (18 Decimals) |
 | **TLD Extension** | `.bot` |
-| **Deployed Contract** | [`0x0b1a2cdc35bf786c1cb17536667dfbf7d03d5a77`](https://scan.bohr.life/address/0x0b1a2cdc35bf786c1cb17536667dfbf7d03d5a77) |
-| **Deployment TX** | [`0xa1117fd046bd7c6c01610ead078b5c523a526ecb5f74d7ff48277f267d4a4e84`](https://scan.bohr.life/tx/0xa1117fd046bd7c6c01610ead078b5c523a526ecb5f74d7ff48277f267d4a4e84) |
+| **Deployed Contract** | [`0x8bfaa8c9d366651f898b3a3c93f5f7cd32aa2eeb`](https://scan.bohr.life/address/0x8bfaa8c9d366651f898b3a3c93f5f7cd32aa2eeb) |
+| **Deployment TX** | [`0x6a88d0b59363a02430b013ca7c5b3a37e75e96dd006823521bd1f1d0dba10d72`](https://scan.bohr.life/tx/0x6a88d0b59363a02430b013ca7c5b3a37e75e96dd006823521bd1f1d0dba10d72) |
 
 ---
 

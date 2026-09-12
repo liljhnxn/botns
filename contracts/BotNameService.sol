@@ -4,12 +4,13 @@ pragma solidity ^0.8.20;
 /**
  * @title BotNameService
  * @notice Decentralized Domain Name Service for the Botchain Network (.bot)
- * @dev Supports registration, renewal, multi-record resolution, reverse resolution, and subdomains.
+ * @dev All registration and renewal fees are automatically forwarded directly to the treasury address.
  */
 contract BotNameService {
     string public constant TLD = "bot";
 
     address public owner;
+    address public treasury;
     bool public paused;
 
     // Pricing in wei (native BOT token) per year
@@ -22,7 +23,7 @@ contract BotNameService {
     uint256 public constant GRACE_PERIOD = 30 days;
 
     struct Domain {
-        string name;            // e.g. "satoshit" (without .bot)
+        string name;            // e.g. "satoshi" (without .bot)
         address owner;          // Current domain controller / owner
         address resolvedAddress;// Resolved EVM wallet address
         uint256 registeredAt;   // First registration timestamp
@@ -101,6 +102,10 @@ contract BotNameService {
         address indexed user,
         string name
     );
+    event TreasuryUpdated(
+        address indexed oldTreasury,
+        address indexed newTreasury
+    );
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Only contract owner can call");
@@ -114,6 +119,7 @@ contract BotNameService {
 
     constructor() {
         owner = msg.sender;
+        treasury = msg.sender;
     }
 
     // --- Pricing & Calculation ---
@@ -149,7 +155,7 @@ contract BotNameService {
         return block.timestamp > (d.expiresAt + GRACE_PERIOD);
     }
 
-    // --- Core Registration ---
+    // --- Core Registration with Direct Payment to Treasury ---
 
     function register(
         string memory name,
@@ -188,9 +194,14 @@ contract BotNameService {
             emit PrimaryNameSet(msg.sender, cleanName);
         }
 
+        // Direct transfer fee to owner/treasury address
+        (bool sentToTreasury, ) = payable(treasury).call{value: requiredCost}("");
+        require(sentToTreasury, "Failed to transfer registration fee to treasury");
+
         // Refund any excess payment
         if (msg.value > requiredCost) {
-            payable(msg.sender).transfer(msg.value - requiredCost);
+            (bool refundSuccess, ) = payable(msg.sender).call{value: msg.value - requiredCost}("");
+            require(refundSuccess, "Refund of excess payment failed");
         }
 
         emit DomainRegistered(cleanName, nameHash, msg.sender, resolved, expiry, requiredCost);
@@ -207,15 +218,18 @@ contract BotNameService {
         require(msg.value >= requiredCost, "Insufficient BOT for renewal");
 
         if (d.expiresAt < block.timestamp) {
-            // Already inside grace period: extend from now
             d.expiresAt = block.timestamp + (durationYears * SECONDS_PER_YEAR);
         } else {
-            // Extend from current expiration
             d.expiresAt += (durationYears * SECONDS_PER_YEAR);
         }
 
+        // Direct transfer renewal fee to treasury
+        (bool sentToTreasury, ) = payable(treasury).call{value: requiredCost}("");
+        require(sentToTreasury, "Failed to transfer renewal fee to treasury");
+
         if (msg.value > requiredCost) {
-            payable(msg.sender).transfer(msg.value - requiredCost);
+            (bool refundSuccess, ) = payable(msg.sender).call{value: msg.value - requiredCost}("");
+            require(refundSuccess, "Refund of excess payment failed");
         }
 
         emit DomainRenewed(cleanName, nameHash, d.expiresAt, requiredCost);
@@ -356,6 +370,13 @@ contract BotNameService {
 
     // --- Admin Functions ---
 
+    function setTreasury(address _treasury) external onlyOwner {
+        require(_treasury != address(0), "Invalid treasury address");
+        address oldTreasury = treasury;
+        treasury = _treasury;
+        emit TreasuryUpdated(oldTreasury, _treasury);
+    }
+
     function setPrices(uint256 _price1to2, uint256 _price3, uint256 _price4, uint256 _price5Plus) external onlyOwner {
         price1to2Chars = _price1to2;
         price3Chars = _price3;
@@ -364,7 +385,7 @@ contract BotNameService {
     }
 
     function withdraw() external onlyOwner {
-        payable(owner).transfer(address(this).balance);
+        payable(treasury).transfer(address(this).balance);
     }
 
     function setPaused(bool _paused) external onlyOwner {

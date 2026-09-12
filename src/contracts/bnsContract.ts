@@ -1,7 +1,7 @@
 import { parseAbi } from 'viem';
 
 export const BNS_CONTRACT_ADDRESS = (process.env.NEXT_PUBLIC_BNS_CONTRACT_ADDRESS ||
-  '0x0b1a2cdc35bf786c1cb17536667dfbf7d03d5a77') as `0x${string}`;
+  '0x8bfaa8c9d366651f898b3a3c93f5f7cd32aa2eeb') as `0x${string}`;
 
 export const BNS_ABI = [
   {
@@ -243,6 +243,25 @@ export const BNS_ABI = [
       }
     ],
     "name": "TextRecordChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "oldTreasury",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newTreasury",
+        "type": "address"
+      }
+    ],
+    "name": "TreasuryUpdated",
     "type": "event"
   },
   {
@@ -827,6 +846,19 @@ export const BNS_ABI = [
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "_treasury",
+        "type": "address"
+      }
+    ],
+    "name": "setTreasury",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
@@ -877,6 +909,19 @@ export const BNS_ABI = [
     "name": "transferDomain",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "treasury",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
