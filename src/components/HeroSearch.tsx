@@ -1,0 +1,206 @@
+'use client';
+
+import React, { useState, useMemo } from 'react';
+import { Search, Sparkles, CheckCircle, XCircle, ArrowRight, ShieldCheck, Zap, Coins } from 'lucide-react';
+import { useAccount, useReadContract } from 'wagmi';
+import { BNS_CONTRACT_ADDRESS, BNS_ABI } from '@/contracts/bnsContract';
+import { formatEther } from 'viem';
+
+interface HeroSearchProps {
+  onSelectDomain: (domainName: string, priceBot: string) => void;
+}
+
+export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
+  const [query, setQuery] = useState('');
+  const { isConnected } = useAccount();
+
+  // Normalize query: remove spaces, trailing .bot, and convert to lower
+  const cleanName = useMemo(() => {
+    let raw = query.trim().toLowerCase();
+    if (raw.endsWith('.bot')) {
+      raw = raw.slice(0, -4);
+    }
+    return raw.replace(/[^a-z0-9-]/g, '');
+  }, [query]);
+
+  // Calculate pricing based on length
+  const estimatedPrice = useMemo(() => {
+    if (!cleanName) return '2';
+    const len = cleanName.length;
+    if (len <= 2) return '50';
+    if (len === 3) return '20';
+    if (len === 4) return '10';
+    return '2';
+  }, [cleanName]);
+
+  // Check on-chain availability if contract is deployed
+  const isContractValid = BNS_CONTRACT_ADDRESS !== '0x0000000000000000000000000000000000000000';
+
+  const { data: onChainAvailable, isLoading: isCheckingContract } = useReadContract({
+    address: BNS_CONTRACT_ADDRESS,
+    abi: BNS_ABI,
+    functionName: 'isAvailable',
+    args: [cleanName],
+    query: {
+      enabled: isContractValid && cleanName.length > 0,
+    },
+  });
+
+  // State: is domain available?
+  const isAvailable = isContractValid ? onChainAvailable ?? true : true;
+
+  const handleRegisterClick = () => {
+    if (!cleanName) return;
+    onSelectDomain(cleanName, estimatedPrice);
+  };
+
+  return (
+    <div className="relative pt-12 pb-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center z-10">
+      
+      {/* Network Badge */}
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-6 animate-pulse-glow">
+        <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+        <span>Botchain Testnet (Chain ID: 968)</span>
+      </div>
+
+      {/* Hero Headline */}
+      <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6">
+        Your Web3 Identity on <br />
+        <span className="text-gradient">Botchain Network</span>
+      </h1>
+
+      <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+        Claim your <span className="text-cyan-400 font-semibold">.bot</span> domain name. Replace complex hexadecimal addresses with simple, memorable decentralized names.
+      </p>
+
+      {/* Main Search Box */}
+      <div className="max-w-2xl mx-auto">
+        <div className="relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 rounded-2xl blur-lg opacity-30 group-hover:opacity-60 transition duration-500"></div>
+          
+          <div className="relative flex flex-col sm:flex-row items-center gap-2 bg-[#0c101b] border border-slate-700/60 rounded-2xl p-2.5 shadow-2xl">
+            <div className="flex items-center flex-1 w-full pl-3 gap-2">
+              <Search className="w-5 h-5 text-slate-400 flex-shrink-0" />
+              <input
+                type="text"
+                placeholder="Search your favorite name (e.g. satoshi, alex, ai)"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="w-full bg-transparent text-white placeholder-slate-500 text-lg sm:text-xl focus:outline-none font-medium"
+              />
+              <span className="font-mono text-cyan-400 font-bold text-lg pr-3">.bot</span>
+            </div>
+
+            <button
+              onClick={handleRegisterClick}
+              disabled={!cleanName}
+              className="w-full sm:w-auto btn-primary whitespace-nowrap text-base py-3 px-7"
+            >
+              <span>Search & Claim</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Live Search Status Card */}
+        {cleanName && (
+          <div className="mt-6 glass-panel p-5 text-left animate-float">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-2xl font-bold text-white font-mono">{cleanName}<span className="text-cyan-400">.bot</span></h3>
+                  {isAvailable ? (
+                    <span className="badge-available">
+                      <CheckCircle className="w-3.5 h-3.5" /> Available
+                    </span>
+                  ) : (
+                    <span className="badge-taken">
+                      <XCircle className="w-3.5 h-3.5" /> Taken
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-slate-400 mt-1 flex items-center gap-1.5">
+                  <Coins className="w-3.5 h-3.5 text-amber-400" />
+                  Estimated: <strong className="text-slate-200">{estimatedPrice} BOT</strong> / year
+                  <span className="text-slate-500">({cleanName.length} character tier)</span>
+                </p>
+              </div>
+
+              <button
+                onClick={handleRegisterClick}
+                disabled={!isAvailable}
+                className="btn-primary py-2.5 px-6 text-sm"
+              >
+                {isAvailable ? 'Register Now' : 'View Domain Details'}
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Feature Badges */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-16 max-w-4xl mx-auto text-left">
+        <div className="glass-panel p-5">
+          <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-3">
+            <Zap className="w-5 h-5 text-blue-400" />
+          </div>
+          <h4 className="text-white font-bold text-base mb-1">Instant Resolution</h4>
+          <p className="text-slate-400 text-xs leading-relaxed">
+            Send and receive tokens, NFTs, and messages on Botchain with human-readable names.
+          </p>
+        </div>
+
+        <div className="glass-panel p-5">
+          <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mb-3">
+            <ShieldCheck className="w-5 h-5 text-cyan-400" />
+          </div>
+          <h4 className="text-white font-bold text-base mb-1">100% On-Chain Ownership</h4>
+          <p className="text-slate-400 text-xs leading-relaxed">
+            Full decentralization on Bohr Botchain EVM. Transfer, update records, and retain total control.
+          </p>
+        </div>
+
+        <div className="glass-panel p-5">
+          <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-3">
+            <Sparkles className="w-5 h-5 text-purple-400" />
+          </div>
+          <h4 className="text-white font-bold text-base mb-1">Subdomains & Profiles</h4>
+          <p className="text-slate-400 text-xs leading-relaxed">
+            Create unlimited subdomains (e.g., pay.alex.bot) and link avatars, socials, and IPFS sites.
+          </p>
+        </div>
+      </div>
+
+      {/* Pricing Tiers Table */}
+      <div className="mt-14 glass-panel p-6 max-w-3xl mx-auto text-left">
+        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
+          <Coins className="w-4 h-4 text-amber-400" />
+          Annual Registration Pricing Tiers
+        </h3>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+          <div className="p-3.5 rounded-xl bg-white/5 border border-white/5">
+            <div className="text-xs text-slate-400 font-medium">1-2 Characters</div>
+            <div className="text-lg font-bold text-cyan-400 mt-1">50 BOT</div>
+            <div className="text-[10px] text-slate-500">Ultra Rare</div>
+          </div>
+          <div className="p-3.5 rounded-xl bg-white/5 border border-white/5">
+            <div className="text-xs text-slate-400 font-medium">3 Characters</div>
+            <div className="text-lg font-bold text-blue-400 mt-1">20 BOT</div>
+            <div className="text-[10px] text-slate-500">Rare Tier</div>
+          </div>
+          <div className="p-3.5 rounded-xl bg-white/5 border border-white/5">
+            <div className="text-xs text-slate-400 font-medium">4 Characters</div>
+            <div className="text-lg font-bold text-purple-400 mt-1">10 BOT</div>
+            <div className="text-[10px] text-slate-500">Popular</div>
+          </div>
+          <div className="p-3.5 rounded-xl bg-white/5 border border-white/5">
+            <div className="text-xs text-slate-400 font-medium">5+ Characters</div>
+            <div className="text-lg font-bold text-emerald-400 mt-1">2 BOT</div>
+            <div className="text-[10px] text-slate-500">Standard</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  );
+}

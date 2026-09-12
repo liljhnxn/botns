@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07090e" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="cyanBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="50%" stop-color="#4facfe" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+    <linearGradient id="botBadgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Base Rounded Container -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="6" />
+
+  <!-- Outer Cyber Orbit Ring -->
+  <circle cx="256" cy="256" r="170" fill="none" stroke="url(#cyanBlueGrad)" stroke-width="4" stroke-dasharray="16 12" opacity="0.4" />
+  
+  <!-- Glowing Hexagonal Core Node -->
+  <polygon points="256,120 376,190 376,322 256,392 136,322 136,190" fill="#0d1424" stroke="url(#cyanBlueGrad)" stroke-width="8" filter="url(#glow)" />
+
+  <!-- Internal Circuit Structure -->
+  <polygon points="256,155 346,207 346,305 256,357 166,305 166,207" fill="none" stroke="rgba(6, 182, 212, 0.3)" stroke-width="3" />
+  
+  <!-- Center Bot Circuit Orb -->
+  <circle cx="256" cy="256" r="48" fill="url(#cyanBlueGrad)" filter="url(#softGlow)" />
+  <circle cx="256" cy="256" r="28" fill="#07090e" />
+  <circle cx="256" cy="256" r="12" fill="#00f2fe" />
+
+  <!-- Connecting Data Pins -->
+  <line x1="256" y1="120" x2="256" y2="155" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" />
+  <line x1="376" y1="190" x2="346" y2="207" stroke="#4facfe" stroke-width="6" stroke-linecap="round" />
+  <line x1="376" y1="322" x2="346" y2="305" stroke="#8b5cf6" stroke-width="6" stroke-linecap="round" />
+  <line x1="256" y1="392" x2="256" y2="357" stroke="#8b5cf6" stroke-width="6" stroke-linecap="round" />
+  <line x1="136" y1="322" x2="166" y2="305" stroke="#4facfe" stroke-width="6" stroke-linecap="round" />
+  <line x1="136" y1="190" x2="166" y2="207" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" />
+
+  <!-- Corner Glowing Node Dots -->
+  <circle cx="256" cy="120" r="10" fill="#00f2fe" filter="url(#softGlow)" />
+  <circle cx="376" cy="190" r="10" fill="#4facfe" filter="url(#softGlow)" />
+  <circle cx="376" cy="322" r="10" fill="#8b5cf6" filter="url(#softGlow)" />
+  <circle cx="256" cy="392" r="10" fill="#8b5cf6" filter="url(#softGlow)" />
+  <circle cx="136" cy="322" r="10" fill="#4facfe" filter="url(#softGlow)" />
+  <circle cx="136" cy="190" r="10" fill="#00f2fe" filter="url(#softGlow)" />
+
+  <!-- Top Domain Indicator Badge -->
+  <g transform="translate(196, 420)">
+    <rect width="120" height="34" rx="8" fill="url(#botBadgeGrad)" />
+    <text x="60" y="23" fill="#07090e" font-family="'Space Grotesk', system-ui, sans-serif" font-size="18" font-weight="900" text-anchor="middle" letter-spacing="2">.BOT</text>
+  </g>
+</svg>

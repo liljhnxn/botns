@@ -1,0 +1,42 @@
+{
+  "name": "botchain-domains",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "deploy": "node scripts/deploy.js",
+    "check-balance": "node scripts/checkBalance.js"
+  },
+  "dependencies": {
+    "@metamask/connect-evm": "^2.1.1",
+    "@reown/appkit": "^1.8.23",
+    "@reown/appkit-adapter-wagmi": "^1.8.23",
+    "@tanstack/react-query": "^5.102.8",
+    "@x402/core": "^2.25.0",
+    "@x402/evm": "^2.25.0",
+    "@x402/svm": "^2.25.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.428.0",
+    "next": "^14.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.2",
+    "viem": "^2.56.3",
+    "wagmi": "^2.19.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.5.6",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.5",
+    "postcss": "^8.5.28",
+    "solc": "^0.8.20",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.5.4"
+  }
+}
