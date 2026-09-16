@@ -64,7 +64,7 @@ export default function DomainInspector() {
                 <span>{inspectedName}</span>
                 <span className="text-cyan-400">.bot</span>
               </h2>
-              <p className="text-xs text-slate-400 mt-1">Botchain Testnet (Chain 968)</p>
+              <p className="text-xs text-slate-400 mt-1">BOT Chain Mainnet (Chain 677)</p>
             </div>
             <span className="badge-available self-start sm:self-auto">Status: Registered</span>
           </div>

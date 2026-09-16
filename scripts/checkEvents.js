@@ -14,6 +14,8 @@ const rpcUrl = rpcMatch ? rpcMatch[1].trim() : 'https://rpc.botchain.ai';
 const chainIdMatch = envContent.match(/NEXT_PUBLIC_CHAIN_ID=([^\r\n]+)/);
 const chainId = chainIdMatch ? parseInt(chainIdMatch[1].trim(), 10) : 677;
 
+const treasuryAddress = '0x83acc57bb9CDe889b248E9c740F5248637cd89f4';
+
 const botchain = defineChain({
   id: chainId,
   name: 'BOT Chain',
@@ -28,24 +30,20 @@ const client = createPublicClient({
 });
 
 async function main() {
-  try {
-    const treasury = await client.readContract({
-      address: contractAddress,
-      abi: [{ type: 'function', name: 'treasury', inputs: [], outputs: [{ type: 'address' }], stateMutability: 'view' }],
-      functionName: 'treasury',
-    });
-    const owner = await client.readContract({
-      address: contractAddress,
-      abi: [{ type: 'function', name: 'owner', inputs: [], outputs: [{ type: 'address' }], stateMutability: 'view' }],
-      functionName: 'owner',
-    });
+  console.log(`Querying BOT Chain (Chain ID ${chainId}) at ${rpcUrl}...`);
+  const contractBal = await client.getBalance({ address: contractAddress });
+  const treasuryBal = await client.getBalance({ address: treasuryAddress });
+  const totalRegistered = await client.readContract({
+    address: contractAddress,
+    abi: [{ type: 'function', name: 'totalDomainsRegistered', inputs: [], outputs: [{ type: 'uint256' }], stateMutability: 'view' }],
+    functionName: 'totalDomainsRegistered',
+  });
 
-    console.log('Contract Address:', contractAddress);
-    console.log('Contract Owner:   ', owner);
-    console.log('Contract Treasury:', treasury);
-  } catch (err) {
-    console.error('Error querying contract:', err.message || err);
-  }
+  console.log('Contract Address:', contractAddress);
+  console.log('Contract Balance:', contractBal.toString(), `(${(Number(contractBal)/1e18).toFixed(4)} BOT)`);
+  console.log('Treasury Address:', treasuryAddress);
+  console.log('Treasury Balance:', treasuryBal.toString(), `(${(Number(treasuryBal)/1e18).toFixed(4)} BOT)`);
+  console.log('Total Domains Registered on Contract:', totalRegistered.toString());
 }
 
-main();
+main().catch(console.error);

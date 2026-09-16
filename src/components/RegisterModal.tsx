@@ -5,7 +5,7 @@ import { X, Check, AlertCircle, Loader2, ExternalLink, ShieldCheck, Sparkles } f
 import { useAccount, useWriteContract, useWaitForTransactionReceipt, useChainId, useSwitchChain } from 'wagmi';
 import { parseEther } from 'viem';
 import { BNS_CONTRACT_ADDRESS, BNS_ABI } from '@/contracts/bnsContract';
-import { botchainTestnet } from '@/config/chains';
+import { botchainMainnet } from '@/config/chains';
 
 interface RegisterModalProps {
   domainName: string;
@@ -32,7 +32,7 @@ export default function RegisterModal({
   const [simulatedSuccess, setSimulatedSuccess] = useState<boolean>(false);
 
   const isContractReady = BNS_CONTRACT_ADDRESS !== '0x0000000000000000000000000000000000000000';
-  const isCorrectChain = chainId === botchainTestnet.id;
+  const isCorrectChain = chainId === botchainMainnet.id;
 
   const totalBotCost = (parseFloat(basePricePerYear) * duration).toString();
 
@@ -60,9 +60,9 @@ export default function RegisterModal({
 
     if (!isCorrectChain) {
       if (switchChain) {
-        switchChain({ chainId: botchainTestnet.id });
+        switchChain({ chainId: botchainMainnet.id });
       } else {
-        alert('Please switch your wallet network to Botchain Testnet (Chain ID 968)');
+        alert('Please switch your wallet network to BOT Chain Mainnet (Chain ID 677)');
       }
       return;
     }

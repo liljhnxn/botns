@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "deploy": "node scripts/deploy.js",
-    "check-balance": "node scripts/checkBalance.js"
+    "check-balance": "node scripts/checkBalance.js",
+    "verify": "node scripts/verifyContract.js"
   },
   "dependencies": {
     "@metamask/connect-evm": "^2.1.1",

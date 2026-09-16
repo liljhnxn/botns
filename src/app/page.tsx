@@ -67,14 +67,14 @@ export default function Home() {
           
           <div className="flex items-center gap-2">
             <Cpu className="w-4 h-4 text-cyan-400" />
-            <span className="text-slate-300 font-semibold">Botchain Domain Name Service (.bot)</span>
+            <span className="text-slate-300 font-semibold">BOT Chain Name Service (.bot)</span>
             <span className="text-slate-600">|</span>
-            <span>Testnet Chain ID: 968</span>
+            <span>Mainnet Chain ID: 677</span>
           </div>
 
           <div className="flex items-center gap-4">
             <a
-              href="https://rpc.bohr.life"
+              href="https://rpc.botchain.ai"
               target="_blank"
               rel="noreferrer"
               className="hover:text-cyan-400 flex items-center gap-1 transition-colors"
@@ -83,12 +83,12 @@ export default function Home() {
               <ExternalLink className="w-3 h-3" />
             </a>
             <a
-              href="https://scan.bohr.life"
+              href="https://scan.botchain.ai"
               target="_blank"
               rel="noreferrer"
               className="hover:text-cyan-400 flex items-center gap-1 transition-colors"
             >
-              <span>BohrScan Explorer</span>
+              <span>BotScan Explorer</span>
               <ExternalLink className="w-3 h-3" />
             </a>
           </div>

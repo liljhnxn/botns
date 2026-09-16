@@ -18,7 +18,7 @@ export default function ContractDeployGuide() {
 2. Create a new file 'BotNameService.sol' and paste the contract code from contracts/BotNameService.sol
 3. Compile with Solidity Compiler 0.8.20+
 4. Go to 'Deploy & Run Transactions', select Environment: 'Injected Provider - MetaMask'
-5. Ensure your wallet is connected to Botchain Testnet (Chain ID 968, RPC: https://rpc.bohr.life)
+5. Ensure your wallet is connected to BOT Chain Mainnet (Chain ID 677, RPC: https://rpc.botchain.ai)
 6. Click 'Deploy' and confirm transaction in your wallet.
 7. Copy the Deployed Contract Address and paste it into .env.local as NEXT_PUBLIC_BNS_CONTRACT_ADDRESS`;
 
@@ -29,9 +29,9 @@ export default function ContractDeployGuide() {
           <FileCode className="w-3.5 h-3.5" />
           <span>Smart Contract Setup & Deployment</span>
         </div>
-        <h1 className="text-3xl font-bold text-white mb-2">Botchain Smart Contract Guide</h1>
+        <h1 className="text-3xl font-bold text-white mb-2">BOT Chain Smart Contract Guide</h1>
         <p className="text-sm text-slate-400 max-w-xl mx-auto">
-          Deploy <span className="text-cyan-400 font-mono">BotNameService.sol</span> to Botchain Testnet (Chain ID: 968) to enable live registration on-chain.
+          Deploy <span className="text-cyan-400 font-mono">BotNameService.sol</span> to BOT Chain Mainnet (Chain ID: 677) to enable live registration on-chain.
         </p>
       </div>
 
@@ -39,21 +39,21 @@ export default function ContractDeployGuide() {
       <div className="glass-panel p-6 mb-8">
         <h3 className="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4 flex items-center gap-2">
           <Layers className="w-4 h-4 text-cyan-400" />
-          Botchain Testnet Parameters
+          BOT Chain Mainnet Parameters
         </h3>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
           <div className="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex justify-between items-center">
             <span className="text-slate-400">Network Name:</span>
-            <span className="font-mono text-white font-bold">Botchain Testnet / Bohr</span>
+            <span className="font-mono text-white font-bold">BOT Chain Mainnet</span>
           </div>
           <div className="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex justify-between items-center">
             <span className="text-slate-400">Chain ID:</span>
-            <span className="font-mono text-cyan-400 font-bold">968</span>
+            <span className="font-mono text-cyan-400 font-bold">677</span>
           </div>
           <div className="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex justify-between items-center">
             <span className="text-slate-400">RPC URL:</span>
-            <span className="font-mono text-slate-200">https://rpc.bohr.life</span>
+            <span className="font-mono text-slate-200">https://rpc.botchain.ai</span>
           </div>
           <div className="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex justify-between items-center">
             <span className="text-slate-400">Native Token:</span>
@@ -61,8 +61,8 @@ export default function ContractDeployGuide() {
           </div>
           <div className="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex justify-between items-center sm:col-span-2">
             <span className="text-slate-400">Explorer URL:</span>
-            <a href="https://scan.bohr.life" target="_blank" rel="noreferrer" className="font-mono text-cyan-400 hover:underline">
-              https://scan.bohr.life
+            <a href="https://scan.botchain.ai" target="_blank" rel="noreferrer" className="font-mono text-cyan-400 hover:underline">
+              https://scan.botchain.ai
             </a>
           </div>
         </div>

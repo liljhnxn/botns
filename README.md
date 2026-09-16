@@ -16,18 +16,18 @@ Everything is stored **100% on-chain**, eliminating the need for centralized dat
 
 ---
 
-## 🚀 Live Botchain Testnet Deployment
+## 🚀 BOT Chain Mainnet Deployment
 
 | Parameter | Specification |
 | :--- | :--- |
-| **Network Name** | Botchain Testnet (Bohr) |
-| **Chain ID** | `968` |
-| **RPC Endpoint** | `https://rpc.bohr.life` |
-| **Block Explorer** | [https://scan.bohr.life](https://scan.bohr.life) |
+| **Network Name** | BOT Chain Mainnet |
+| **Chain ID** | `677` |
+| **RPC Endpoint** | `https://rpc.botchain.ai` |
+| **Block Explorer** | [https://scan.botchain.ai](https://scan.botchain.ai) |
 | **Native Token** | `BOT` (18 Decimals) |
-| **TLD Extension** | `.bot` |
-| **Deployed Contract** | [`0x8bfaa8c9d366651f898b3a3c93f5f7cd32aa2eeb`](https://scan.bohr.life/address/0x8bfaa8c9d366651f898b3a3c93f5f7cd32aa2eeb) |
-| **Deployment TX** | [`0x6a88d0b59363a02430b013ca7c5b3a37e75e96dd006823521bd1f1d0dba10d72`](https://scan.bohr.life/tx/0x6a88d0b59363a02430b013ca7c5b3a37e75e96dd006823521bd1f1d0dba10d72) |
+| **Deployed Contract** | [`0x2ce45ff1847273f0fd11714744c4f238d004e026`](https://scan.botchain.ai/address/0x2ce45ff1847273f0fd11714744c4f238d004e026) |
+| **Deployment TX** | [`0x256c2593c5dba46497177d79ca282d41e516fdf486ea90b54a97fd66f9f74163`](https://scan.botchain.ai/tx/0x256c2593c5dba46497177d79ca282d41e516fdf486ea90b54a97fd66f9f74163) |
+| **Testnet Fallback** | Chain ID `968` (`https://rpc.bohr.life`) |
 
 ---
 

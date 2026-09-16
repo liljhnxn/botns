@@ -60,7 +60,7 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
       {/* Network Badge */}
       <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-6 animate-pulse-glow">
         <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-        <span>Botchain Testnet (Chain ID: 968)</span>
+        <span>BOT Chain Mainnet (Chain ID: 677)</span>
       </div>
 
       {/* Hero Headline */}

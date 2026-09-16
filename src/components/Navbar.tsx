@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAccount, useChainId } from 'wagmi';
-import { botchainTestnet } from '@/config/chains';
+import { botchainMainnet, botchainTestnet } from '@/config/chains';
 
 interface NavbarProps {
   activeTab: 'search' | 'dashboard' | 'inspector' | 'contract';
@@ -20,7 +20,16 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
     setMounted(true);
   }, []);
 
-  const isCorrectNetwork = chainId === botchainTestnet.id;
+  const isMainnet = chainId === botchainMainnet.id;
+  const isTestnet = chainId === botchainTestnet.id;
+  const isCorrectNetwork = isMainnet || (!isConnected && true);
+  const networkName = isMainnet
+    ? 'BOT Chain (677)'
+    : isTestnet
+    ? 'BOT Testnet (968)'
+    : isConnected
+    ? 'Switch to BOT Chain'
+    : 'BOT Chain (677)';
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-[var(--border-color)] bg-[#07090e]/85 backdrop-blur-md">
@@ -100,7 +109,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
           {mounted && (
             <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border-color)] bg-white/5 text-xs font-medium">
               <span className={`w-2 h-2 rounded-full ${isCorrectNetwork ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]' : 'bg-amber-400'}`}></span>
-              <span className="text-slate-300">Botchain Testnet (968)</span>
+              <span className="text-slate-300">{networkName}</span>
             </div>
           )}
 

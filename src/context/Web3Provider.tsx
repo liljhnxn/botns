@@ -4,15 +4,15 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { createAppKit } from '@reown/appkit/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider, type Config } from 'wagmi';
-import { botchainTestnet } from '@/config/chains';
+import { botchainMainnet, botchainTestnet } from '@/config/chains';
 import { projectId, wagmiAdapter } from '@/config/wagmi';
 
 // Setup queryClient
 const queryClient = new QueryClient();
 
 const metadata = {
-  name: 'Botchain Domain Service (.bot)',
-  description: 'Decentralized Domain Name Service on Botchain Testnet',
+  name: 'BotNS (.bot)',
+  description: 'Decentralized Domain Name & Identity Service on BOT Chain',
   url: 'https://botchain.domains',
   icons: ['https://avatars.githubusercontent.com/u/179229932'],
 };
@@ -30,8 +30,8 @@ export default function Web3Provider({
       createAppKit({
         adapters: [wagmiAdapter],
         projectId,
-        networks: [botchainTestnet],
-        defaultNetwork: botchainTestnet,
+        networks: [botchainMainnet, botchainTestnet],
+        defaultNetwork: botchainMainnet,
         metadata,
         features: {
           analytics: false,

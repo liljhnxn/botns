@@ -1,7 +1,5 @@
-import { parseAbi } from 'viem';
-
 export const BNS_CONTRACT_ADDRESS = (process.env.NEXT_PUBLIC_BNS_CONTRACT_ADDRESS ||
-  '0x8bfaa8c9d366651f898b3a3c93f5f7cd32aa2eeb') as `0x${string}`;
+  '0x2ce45ff1847273f0fd11714744c4f238d004e026') as `0x${string}`;
 
 export const BNS_ABI = [
   {
