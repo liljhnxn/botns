@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BotNS (.bot) — Pitch Deck & Executive Whitepaper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(56, 189, 248, 0.18);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --cyan: #00f2fe;
+      --blue: #38bdf8;
+      --purple: #a855f7;
+      --grad-cyan-blue: linear-gradient(135deg, #00f2fe 0%, #38bdf8 50%, #818cf8 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Fixed Top Control Bar for viewing & exporting */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(7, 9, 14, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 100;
+    }
+
+    .top-bar .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .badge-tld {
+      background: var(--grad-cyan-blue);
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      padding: 0.45rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--grad-cyan-blue);
+      color: #07090e;
+      border: none;
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .deck-container {
+      max-width: 1000px;
+      margin: 80px auto 40px;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .slide {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(12px);
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--grad-cyan-blue);
+    }
+
+    .slide-number {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .slide h2 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .slide p.lead {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    /* Cover specific */
+    .cover-slide {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: radial-gradient(circle at 50% 0%, rgba(0, 242, 254, 0.12), transparent 70%), var(--card-bg);
+    }
+
+    .cover-logo {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 1.5rem;
+      border-radius: 22px;
+      background: rgba(0, 242, 254, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
+    }
+
+    .cover-logo svg {
+      width: 50px;
+      height: 50px;
+    }
+
+    .cover-slide h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 0.75rem;
+      background: var(--grad-cyan-blue);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cover-slide p.subtitle {
+      font-size: 1.25rem;
+      color: #94a3b8;
+      max-width: 650px;
+      margin: 0 auto 2rem;
+    }
+
+    .metadata-badges {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .meta-badge {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Grid cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .feature-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 0.9rem 1.2rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--blue);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+    }
+
+    td {
+      color: #e2e8f0;
+    }
+
+    .highlight-cell {
+      color: var(--cyan);
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      position: relative;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .timeline-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid var(--cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: var(--cyan);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .timeline-badge.done {
+      background: var(--cyan);
+      color: #07090e;
+    }
+
+    .timeline-content h4 {
+      font-size: 1.05rem;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-content p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* Print styles for clean 1-page per slide PDF generation */
+    @media print {
+      .top-bar {
+        display: none !important;
+      }
+      body {
+        background: #07090e !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .deck-container {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .slide {
+        page-break-after: always !important;
+        break-after: page !important;
+        border: none !important;
+        box-shadow: none !important;
+        margin-bottom: 0 !important;
+        min-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fixed Top Actions -->
+  <header class="top-bar">
+    <div class="brand">
+      <span>⚡ BotNS</span>
+      <span class="badge-tld">.BOT</span>
+      <span style="font-size: 0.85rem; color: #64748b; font-weight: normal;">| Pitch Deck</span>
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="window.print()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6v-8z"></path></svg>
+        Save as PDF / Print
+      </button>
+    </div>
+  </header>
+
+  <main class="deck-container">
+
+    <!-- SLIDE 1: COVER -->
+    <section class="slide cover-slide">
+      <div class="slide-number">01 / 08</div>
+      <div class="cover-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#00f2fe" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <h1>BotNS: Botchain Name Service</h1>
+      <p class="subtitle">The Native Decentralized Identity & Domain Protocol for the Botchain (BOT) Ecosystem</p>
+      <div class="metadata-badges">
+        <span class="meta-badge">⛓️ BOT Chain Mainnet (ID: 677)</span>
+        <span class="meta-badge">📜 Contract: 0x2ce45ff...004e026</span>
+        <span class="meta-badge">🛡️ 100% On-Chain</span>
+        <span class="meta-badge">🤖 AI Agent Ready</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: THE PROBLEM -->
+    <section class="slide">
+      <div class="slide-number">02 / 08</div>
+      <h2>The Problem: Web3 UX & AI Fragmentation</h2>
+      <p class="lead">Blockchain infrastructure is built for machines and cryptographic proofs, creating high cognitive load and vulnerability for humans and autonomous agents.</p>
+      
+      <div class="grid-3">
+        <div class="feature-card">
+          <div class="feature-icon">❌</div>
+          <h4>Hexadecimal Blindness</h4>
+          <p>42-character EVM addresses (<code>0x...</code>) cause frequent clipboard mistakes, anxiety, and irreversible transfer losses.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h4>Identity Void</h4>
+          <p>Wallets across Botchain lack a unified, verifiable on-chain profile to link social handles, avatars, and verified reputations.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h4>The AI Agent Dilemma</h4>
+          <p>Autonomous AI agents need recognizable, discoverable, and programmable on-chain handles to execute M2M transactions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: THE SOLUTION -->
+    <section class="slide">
+      <div class="slide-number">03 / 08</div>
+      <h2>The Solution: BotNS (.bot)</h2>
+      <p class="lead">A universal naming standard that replaces raw addresses with memorable, sovereign Web3 handles.</p>
+
+      <div class="grid-2">
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <h4>Human & Machine Readability</h4>
+          <p>Map <code>alex.bot</code> or <code>trader-agent.bot</code> to any EVM wallet, smart contract, or multi-sig vault on Botchain.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h4>Reverse Resolution</h4>
+          <p>Ecosystem dApps display your chosen <code>.bot</code> username automatically instead of a truncated hex hash.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <h4>Multi-Record Storage</h4>
+          <p>Store avatars, Twitter/X, Telegram, GitHub, email, and IPFS/Arweave website hashes directly on-chain.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌳</div>
+          <h4>Infinite Subdomains</h4>
+          <p>Owners can mint unlimited subdomains (e.g. <code>pay.alex.bot</code>, <code>dao.project.bot</code>) with zero extra protocol fees.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: PRODUCT ARCHITECTURE -->
+    <section class="slide">
+      <div class="slide-number">04 / 08</div>
+      <h2>Engineered for Performance & Security</h2>
+      <p class="lead">Autonomous smart contract design with direct fee routing and consumer-grade UX.</p>
+
+      <div class="grid-3">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h4>Direct Treasury Forwarding</h4>
+          <p>Zero contract fund lockup. All registration and renewal fees are automatically dispatched directly to the protocol treasury address.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h4>30-Day Grace Period</h4>
+          <p>Built-in expiration buffer protects domain owners from immediate sniping if renewal is delayed.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">👛</div>
+          <h4>Reown AppKit & Multi-Wallet</h4>
+          <p>Frictionless onboarding with MetaMask, WalletConnect, Coinbase, Rainbow, Rabby, and QR scanners.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: PRICING & TOKENOMICS -->
+    <section class="slide">
+      <div class="slide-number">05 / 08</div>
+      <h2>Fair Length-Based Pricing Model</h2>
+      <p class="lead">Designed to eliminate domain squatting on short names while ensuring high affordability for everyday users.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Tier Category</th>
+            <th>Name Length</th>
+            <th>Annual Fee</th>
+            <th>Target Application</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Ultra-Rare</strong></td>
+            <td>1 – 2 Characters</td>
+            <td class="highlight-cell">50 BOT / year</td>
+            <td>High-value protocols, institutional brands, elite symbols</td>
+          </tr>
+          <tr>
+            <td><strong>Rare</strong></td>
+            <td>3 Characters</td>
+            <td class="highlight-cell">20 BOT / year</td>
+            <td>Popular abbreviations, acronyms, ticker handles</td>
+          </tr>
+          <tr>
+            <td><strong>Popular</strong></td>
+            <td>4 Characters</td>
+            <td class="highlight-cell">10 BOT / year</td>
+            <td>Common first names, projects, AI bot handles</td>
+          </tr>
+          <tr>
+            <td><strong>Standard</strong></td>
+            <td>5+ Characters</td>
+            <td class="highlight-cell">2 BOT / year</td>
+            <td>General public, personal wallets, everyday users</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SLIDE 6: COMPETITIVE MATRIX -->
+    <section class="slide">
+      <div class="slide-number">06 / 08</div>
+      <h2>Competitive Advantage</h2>
+      <p class="lead">How BotNS compares to traditional naming systems and generic forks.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Traditional DNS (.com)</th>
+            <th>Generic EVM Forks</th>
+            <th style="color: #00f2fe;">BotNS (.bot)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>100% On-Chain Storage</strong></td>
+            <td>❌ No (Centralized ICANN)</td>
+            <td>⚠️ Partial</td>
+            <td class="highlight-cell">✅ Yes (EVM Native)</td>
+          </tr>
+          <tr>
+            <td><strong>Botchain Native & Tuned</strong></td>
+            <td>❌ No</td>
+            <td>❌ No</td>
+            <td class="highlight-cell">✅ Yes (Chain ID 677)</td>
+          </tr>
+          <tr>
+            <td><strong>AI Agent Identity Protocol</strong></td>
+            <td>❌ No</td>
+            <td>❌ No</td>
+            <td class="highlight-cell">✅ Built-in Ready</td>
+          </tr>
+          <tr>
+            <td><strong>Automated Treasury Routing</strong></td>
+            <td>❌ N/A</td>
+            <td>⚠️ Manual Withdraw</td>
+            <td class="highlight-cell">✅ Automatic Direct Call</td>
+          </tr>
+          <tr>
+            <td><strong>Free Subdomain Minting</strong></td>
+            <td>⚠️ High registrar cost</td>
+            <td>⚠️ High Gas</td>
+            <td class="highlight-cell">✅ Unlimited & Free</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SLIDE 7: ROADMAP -->
+    <section class="slide">
+      <div class="slide-number">07 / 08</div>
+      <h2>Execution Roadmap</h2>
+      <p class="lead">Clear phases from core infrastructure to autonomous agent adoption.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-badge done">✓</div>
+          <div class="timeline-content">
+            <h4>Phase 1: Core Launch & Mainnet Deployment (Live)</h4>
+            <p>Smart contracts deployed and verified on BOT Chain Mainnet. Live interactive frontend, instant search, registration modal, and reverse resolution dashboard.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-badge">2</div>
+          <div class="timeline-content">
+            <h4>Phase 2: Explorer & Ecosystem Integration (Current)</h4>
+            <p>NPM Resolution SDK release for dApp developers. Collaboration with Botchain scan/explorers to resolve <code>.bot</code> addresses in transaction histories.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-badge">3</div>
+          <div class="timeline-content">
+            <h4>Phase 3: Autonomous AI Agent Identity Registry</h4>
+            <p>Automated API endpoints for AI agents to self-register handles, verify agent signatures, and handle micro-transfers autonomously.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-badge">4</div>
+          <div class="timeline-content">
+            <h4>Phase 4: Decentralized Marketplace & Governance</h4>
+            <p>Native secondary marketplace for trading premium <code>.bot</code> names and transition to community DAO parameter governance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: SUMMARY -->
+    <section class="slide" style="text-align: center;">
+      <div class="slide-number">08 / 08</div>
+      <h2>Join the .bot Revolution</h2>
+      <p class="lead" style="max-width: 650px; margin: 0 auto 2.5rem;">The universal passport for users, builders, and autonomous AI agents across Botchain.</p>
+
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 2rem; max-width: 600px; margin: 0 auto 2rem; text-align: left;">
+        <div style="margin-bottom: 0.75rem;"><strong style="color: var(--cyan);">Contract:</strong> <code style="color: #cbd5e1;">0x2ce45ff1847273f0fd11714744c4f238d004e026</code></div>
+        <div style="margin-bottom: 0.75rem;"><strong style="color: var(--cyan);">Network:</strong> BOT Chain Mainnet (Chain ID 677)</div>
+        <div style="margin-bottom: 0.75rem;"><strong style="color: var(--cyan);">RPC:</strong> <code>https://rpc.botchain.ai</code></div>
+        <div><strong style="color: var(--cyan);">Explorer:</strong> <a href="https://scan.botchain.ai" target="_blank" style="color: var(--blue);">scan.botchain.ai</a></div>
+      </div>
+
+      <button class="btn btn-primary" onclick="window.print()" style="font-size: 1rem; padding: 0.75rem 1.75rem;">
+        Download Deck as PDF
+      </button>
+    </section>
+
+  </main>
+
+</body>
+</html>

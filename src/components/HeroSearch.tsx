@@ -23,16 +23,6 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
     return raw.replace(/[^a-z0-9-]/g, '');
   }, [query]);
 
-  // Calculate pricing based on length
-  const estimatedPrice = useMemo(() => {
-    if (!cleanName) return '2';
-    const len = cleanName.length;
-    if (len <= 2) return '50';
-    if (len === 3) return '20';
-    if (len === 4) return '10';
-    return '2';
-  }, [cleanName]);
-
   // Check on-chain availability if contract is deployed
   const isContractValid = BNS_CONTRACT_ADDRESS !== '0x0000000000000000000000000000000000000000';
 
@@ -45,6 +35,30 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
       enabled: isContractValid && cleanName.length > 0,
     },
   });
+
+  // Dynamically read on-chain price for 1 year
+  const { data: onChainPriceWei } = useReadContract({
+    address: BNS_CONTRACT_ADDRESS,
+    abi: BNS_ABI,
+    functionName: 'getPrice',
+    args: [cleanName, 1n],
+    query: {
+      enabled: isContractValid && cleanName.length > 0,
+    },
+  });
+
+  // Calculate pricing (on-chain price takes priority, fallback to length tier)
+  const estimatedPrice = useMemo(() => {
+    if (onChainPriceWei !== undefined) {
+      return (Number(onChainPriceWei) / 1e18).toString();
+    }
+    if (!cleanName) return '0';
+    const len = cleanName.length;
+    if (len <= 2) return '50';
+    if (len === 3) return '20';
+    if (len === 4) return '10';
+    return '2';
+  }, [cleanName, onChainPriceWei]);
 
   // State: is domain available?
   const isAvailable = isContractValid ? onChainAvailable ?? true : true;
@@ -119,9 +133,16 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-slate-400 mt-1 flex items-center gap-1.5">
+                <p className="text-xs text-slate-400 mt-1 flex items-center gap-1.5 flex-wrap">
                   <Coins className="w-3.5 h-3.5 text-amber-400" />
-                  Estimated: <strong className="text-slate-200">{estimatedPrice} BOT</strong> / year
+                  Cost: 
+                  {estimatedPrice === '0' ? (
+                    <span className="inline-flex items-center gap-1 font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-md">
+                      0 BOT (Free Promo 🎉)
+                    </span>
+                  ) : (
+                    <strong className="text-slate-200">{estimatedPrice} BOT / yr</strong>
+                  )}
                   <span className="text-slate-500">({cleanName.length} character tier)</span>
                 </p>
               </div>

@@ -196,7 +196,11 @@ export default function RegisterModal({
             <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 mb-6 space-y-2">
               <div className="flex justify-between text-xs text-slate-400">
                 <span>Annual Rate:</span>
-                <span className="font-mono text-slate-200">{basePricePerYear} BOT / yr</span>
+                {parseFloat(basePricePerYear) === 0 ? (
+                  <span className="font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">0 BOT (Free Promo 🎉)</span>
+                ) : (
+                  <span className="font-mono text-slate-200">{basePricePerYear} BOT / yr</span>
+                )}
               </div>
               <div className="flex justify-between text-xs text-slate-400">
                 <span>Duration:</span>
@@ -204,7 +208,11 @@ export default function RegisterModal({
               </div>
               <div className="border-t border-slate-800 pt-2 flex justify-between items-center text-sm font-bold text-white">
                 <span>Total Due:</span>
-                <span className="text-cyan-400 text-lg font-mono">{totalBotCost} BOT</span>
+                {parseFloat(totalBotCost) === 0 ? (
+                  <span className="text-emerald-400 text-lg font-mono font-bold">0 BOT (FREE)</span>
+                ) : (
+                  <span className="text-cyan-400 text-lg font-mono">{totalBotCost} BOT</span>
+                )}
               </div>
             </div>
 
