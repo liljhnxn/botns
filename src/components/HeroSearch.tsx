@@ -47,18 +47,13 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
     },
   });
 
-  // Calculate pricing (on-chain price takes priority, fallback to length tier)
+  // Calculate pricing (on-chain price takes priority, defaults to 0 BOT for promo)
   const estimatedPrice = useMemo(() => {
     if (onChainPriceWei !== undefined) {
       return (Number(onChainPriceWei) / 1e18).toString();
     }
-    if (!cleanName) return '0';
-    const len = cleanName.length;
-    if (len <= 2) return '50';
-    if (len === 3) return '20';
-    if (len === 4) return '10';
-    return '2';
-  }, [cleanName, onChainPriceWei]);
+    return '0';
+  }, [onChainPriceWei]);
 
   // State: is domain available?
   const isAvailable = isContractValid ? onChainAvailable ?? true : true;
@@ -136,7 +131,7 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
                 <p className="text-xs text-slate-400 mt-1 flex items-center gap-1.5 flex-wrap">
                   <Coins className="w-3.5 h-3.5 text-amber-400" />
                   Cost: 
-                  {estimatedPrice === '0' ? (
+                  {parseFloat(estimatedPrice) === 0 ? (
                     <span className="inline-flex items-center gap-1 font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-md">
                       0 BOT (Free Promo 🎉)
                     </span>
@@ -152,7 +147,7 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
                 disabled={!isAvailable}
                 className="btn-primary py-2.5 px-6 text-sm"
               >
-                {isAvailable ? 'Register Now' : 'View Domain Details'}
+                {isAvailable ? 'Register (Free)' : 'View Domain Details'}
               </button>
             </div>
           </div>
@@ -194,30 +189,35 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
 
       {/* Pricing Tiers Table */}
       <div className="mt-14 glass-panel p-6 max-w-3xl mx-auto text-left">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
-          <Coins className="w-4 h-4 text-amber-400" />
-          Annual Registration Pricing Tiers
-        </h3>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+          <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+            <Coins className="w-4 h-4 text-amber-400" />
+            Registration Pricing Tiers
+          </h3>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold w-fit">
+            <Sparkles className="w-3.5 h-3.5" /> 2-Week Launch Promo: 100% FREE (0 BOT)
+          </span>
+        </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-          <div className="p-3.5 rounded-xl bg-white/5 border border-white/5">
+          <div className="p-3.5 rounded-xl bg-white/5 border border-emerald-500/30">
             <div className="text-xs text-slate-400 font-medium">1-2 Characters</div>
-            <div className="text-lg font-bold text-cyan-400 mt-1">50 BOT</div>
-            <div className="text-[10px] text-slate-500">Ultra Rare</div>
+            <div className="text-lg font-bold text-emerald-400 mt-1">0 BOT</div>
+            <div className="text-[10px] text-slate-500 line-through">Regular: 50 BOT</div>
           </div>
-          <div className="p-3.5 rounded-xl bg-white/5 border border-white/5">
+          <div className="p-3.5 rounded-xl bg-white/5 border border-emerald-500/30">
             <div className="text-xs text-slate-400 font-medium">3 Characters</div>
-            <div className="text-lg font-bold text-blue-400 mt-1">20 BOT</div>
-            <div className="text-[10px] text-slate-500">Rare Tier</div>
+            <div className="text-lg font-bold text-emerald-400 mt-1">0 BOT</div>
+            <div className="text-[10px] text-slate-500 line-through">Regular: 20 BOT</div>
           </div>
-          <div className="p-3.5 rounded-xl bg-white/5 border border-white/5">
+          <div className="p-3.5 rounded-xl bg-white/5 border border-emerald-500/30">
             <div className="text-xs text-slate-400 font-medium">4 Characters</div>
-            <div className="text-lg font-bold text-purple-400 mt-1">10 BOT</div>
-            <div className="text-[10px] text-slate-500">Popular</div>
+            <div className="text-lg font-bold text-emerald-400 mt-1">0 BOT</div>
+            <div className="text-[10px] text-slate-500 line-through">Regular: 10 BOT</div>
           </div>
-          <div className="p-3.5 rounded-xl bg-white/5 border border-white/5">
+          <div className="p-3.5 rounded-xl bg-white/5 border border-emerald-500/30">
             <div className="text-xs text-slate-400 font-medium">5+ Characters</div>
-            <div className="text-lg font-bold text-emerald-400 mt-1">2 BOT</div>
-            <div className="text-[10px] text-slate-500">Standard</div>
+            <div className="text-lg font-bold text-emerald-400 mt-1">0 BOT</div>
+            <div className="text-[10px] text-slate-500 line-through">Regular: 2 BOT</div>
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ export default function Home() {
   // Registration Modal State
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [selectedDomain, setSelectedDomain] = useState('');
-  const [selectedPrice, setSelectedPrice] = useState('2');
+  const [selectedPrice, setSelectedPrice] = useState('0');
 
   const handleSelectDomain = (domain: string, price: string) => {
     setSelectedDomain(domain);
