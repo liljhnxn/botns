@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { X, Check, AlertCircle, Loader2, ExternalLink, ShieldCheck, Sparkles } from 'lucide-react';
 import { useAccount, useWriteContract, useWaitForTransactionReceipt, useChainId, useSwitchChain } from 'wagmi';
-import { parseEther } from 'viem';
+import { parseEther, isAddress } from 'viem';
 import { BNS_CONTRACT_ADDRESS, BNS_ABI } from '@/contracts/bnsContract';
 import { botchainMainnet } from '@/config/chains';
 
@@ -36,6 +36,15 @@ export default function RegisterModal({
 
   const totalBotCost = (parseFloat(basePricePerYear) * duration).toString();
 
+  const isCustomAddress = resolvedAddr.trim().length > 0;
+  const isAddressValid = isCustomAddress ? isAddress(resolvedAddr.trim()) : true;
+
+  const targetAddress = isCustomAddress && isAddressValid
+    ? (resolvedAddr.trim() as `0x${string}`)
+    : (address || '0x0000000000000000000000000000000000000000');
+
+  const cleanDomain = domainName.trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
+
   const {
     writeContract,
     data: txHash,
@@ -50,11 +59,14 @@ export default function RegisterModal({
 
   if (!isOpen) return null;
 
-  const targetAddress = resolvedAddr.trim() || address || '0x0000000000000000000000000000000000000000';
-
   const handleRegister = async () => {
     if (!isConnected) {
       alert('Please connect your wallet first');
+      return;
+    }
+
+    if (isCustomAddress && !isAddressValid) {
+      alert('Please enter a valid wallet address (42 hex characters) or leave blank.');
       return;
     }
 
@@ -73,7 +85,7 @@ export default function RegisterModal({
       setTimeout(() => {
         setIsSimulating(false);
         setSimulatedSuccess(true);
-        onSuccess(domainName);
+        onSuccess(cleanDomain);
       }, 1500);
       return;
     }
@@ -83,7 +95,7 @@ export default function RegisterModal({
         address: BNS_CONTRACT_ADDRESS,
         abi: BNS_ABI,
         functionName: 'register',
-        args: [domainName, targetAddress as `0x${string}`, BigInt(duration)],
+        args: [cleanDomain, targetAddress as `0x${string}`, BigInt(duration)],
         value: parseEther(totalBotCost),
       });
     } catch (err) {
@@ -177,19 +189,37 @@ export default function RegisterModal({
 
             {/* Resolved Address */}
             <div className="mb-5">
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-                Resolved Wallet Address (Recipient)
-              </label>
+              <div className="flex items-center justify-between mb-2">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  Resolved Wallet Address (Recipient)
+                </label>
+                {address && !resolvedAddr && (
+                  <span className="text-[10px] text-cyan-400 font-mono">
+                    Auto: {address.slice(0, 6)}...{address.slice(-4)}
+                  </span>
+                )}
+              </div>
               <input
                 type="text"
-                placeholder={address || '0x...'}
+                placeholder={address || '0x... (leave empty for connected wallet)'}
                 value={resolvedAddr}
-                onChange={(e) => setResolvedAddr(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white font-mono text-xs focus:outline-none focus:border-cyan-400"
+                onChange={(e) => setResolvedAddr(e.target.value.trim())}
+                className={`w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border text-white font-mono text-xs focus:outline-none ${
+                  isCustomAddress && !isAddressValid
+                    ? 'border-rose-500/80 focus:border-rose-400'
+                    : 'border-slate-700 focus:border-cyan-400'
+                }`}
               />
-              <p className="text-[11px] text-slate-500 mt-1">
-                Leave empty to automatically resolve to your connected wallet.
-              </p>
+              {isCustomAddress && !isAddressValid ? (
+                <p className="text-[11px] text-rose-400 mt-1.5 flex items-center gap-1">
+                  <AlertCircle className="w-3.5 h-3.5" />
+                  Invalid address format (must be 42 hex characters starting with 0x).
+                </p>
+              ) : (
+                <p className="text-[11px] text-slate-500 mt-1">
+                  Leave empty to automatically resolve to your connected wallet.
+                </p>
+              )}
             </div>
 
             {/* Price Summary Breakdown */}
