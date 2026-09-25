@@ -4,7 +4,7 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { createAppKit } from '@reown/appkit/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider, type Config } from 'wagmi';
-import { botchainMainnet, botchainTestnet } from '@/config/chains';
+import { botchainMainnet } from '@/config/chains';
 import { projectId, wagmiAdapter } from '@/config/wagmi';
 
 // Setup queryClient
@@ -30,7 +30,7 @@ export default function Web3Provider({
       createAppKit({
         adapters: [wagmiAdapter],
         projectId,
-        networks: [botchainMainnet, botchainTestnet],
+        networks: [botchainMainnet],
         defaultNetwork: botchainMainnet,
         metadata,
         features: {

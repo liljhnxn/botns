@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAccount, useChainId } from 'wagmi';
-import { botchainMainnet, botchainTestnet } from '@/config/chains';
+import { botchainMainnet } from '@/config/chains';
 
 interface NavbarProps {
   activeTab: 'search' | 'dashboard' | 'inspector' | 'contract';
@@ -21,12 +21,9 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   }, []);
 
   const isMainnet = chainId === botchainMainnet.id;
-  const isTestnet = chainId === botchainTestnet.id;
   const isCorrectNetwork = isMainnet || (!isConnected && true);
   const networkName = isMainnet
     ? 'BOT Chain (677)'
-    : isTestnet
-    ? 'BOT Testnet (968)'
     : isConnected
     ? 'Switch to BOT Chain'
     : 'BOT Chain (677)';

@@ -33,9 +33,9 @@ export default function DomainInspector() {
   return (
     <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Botchain Domain Inspector</h1>
+        <h1 className="text-3xl font-bold text-white mb-2">BOT Chain Domain Inspector</h1>
         <p className="text-sm text-slate-400">
-          Lookup any <span className="text-cyan-400">.bot</span> domain, check owner, target address, resolution records and expiry status on Botchain Testnet.
+          Lookup any <span className="text-cyan-400">.bot</span> domain, check owner, target address, resolution records and expiry status on BOT Chain Mainnet (Chain ID 677).
         </p>
       </div>
 

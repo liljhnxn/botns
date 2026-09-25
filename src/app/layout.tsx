@@ -9,7 +9,7 @@ const Web3Provider = dynamic(() => import('@/context/Web3Provider'), {
 export const metadata: Metadata = {
   title: 'BotNS (.bot) | Decentralized Web3 Identity on BOT Chain',
   description: 'Register, manage, and resolve human-readable .bot domain names on BOT Chain Mainnet (Chain ID 677). Replace hexadecimal addresses with decentralized Web3 names.',
-  keywords: ['BOT Chain', 'BotNS', 'Domain Name Service', '.bot', 'Web3 domains', 'Bohr', 'BOT token', 'EVM domains'],
+  keywords: ['BOT Chain', 'BotNS', 'Domain Name Service', '.bot', 'Web3 domains', 'BOT token', 'EVM domains', 'AI agents'],
   openGraph: {
     title: 'BotNS — BOT Chain Domain Service (.bot)',
     description: 'Decentralized Domain Name Service on BOT Chain Mainnet',

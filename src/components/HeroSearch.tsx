@@ -172,7 +172,7 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
           </div>
           <h4 className="text-white font-bold text-base mb-1">100% On-Chain Ownership</h4>
           <p className="text-slate-400 text-xs leading-relaxed">
-            Full decentralization on Bohr Botchain EVM. Transfer, update records, and retain total control.
+            Full decentralization on BOT Chain Mainnet EVM. Transfer, update records, and retain total control.
           </p>
         </div>
 

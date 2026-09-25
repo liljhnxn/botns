@@ -2,7 +2,7 @@ import { defineChain } from 'viem';
 
 export const botchainMainnet = defineChain({
   id: 677,
-  name: 'BOT Chain',
+  name: 'BOT Chain Mainnet',
   nativeCurrency: {
     name: 'BOT',
     symbol: 'BOT',
@@ -23,31 +23,6 @@ export const botchainMainnet = defineChain({
     },
   },
   testnet: false,
-});
-
-export const botchainTestnet = defineChain({
-  id: 968,
-  name: 'Botchain Testnet',
-  nativeCurrency: {
-    name: 'BOT',
-    symbol: 'BOT',
-    decimals: 18,
-  },
-  rpcUrls: {
-    default: {
-      http: ['https://rpc.bohr.life'],
-    },
-    public: {
-      http: ['https://rpc.bohr.life'],
-    },
-  },
-  blockExplorers: {
-    default: {
-      name: 'BohrScan',
-      url: 'https://scan.bohr.life',
-    },
-  },
-  testnet: true,
 });
 
 // Default active chain

@@ -23,11 +23,11 @@ Everything is stored **100% on-chain**, eliminating the need for centralized dat
 | **Network Name** | BOT Chain Mainnet |
 | **Chain ID** | `677` |
 | **RPC Endpoint** | `https://rpc.botchain.ai` |
-| **Block Explorer** | [https://scan.botchain.ai](https://scan.botchain.ai) |
 | **Native Token** | `BOT` (18 Decimals) |
+| **Total Supply** | `150 Million BOT` |
+| **Block Explorer** | [https://scan.botchain.ai](https://scan.botchain.ai) |
 | **Deployed Contract** | [`0x2ce45ff1847273f0fd11714744c4f238d004e026`](https://scan.botchain.ai/address/0x2ce45ff1847273f0fd11714744c4f238d004e026) |
 | **Deployment TX** | [`0x256c2593c5dba46497177d79ca282d41e516fdf486ea90b54a97fd66f9f74163`](https://scan.botchain.ai/tx/0x256c2593c5dba46497177d79ca282d41e516fdf486ea90b54a97fd66f9f74163) |
-| **Testnet Fallback** | Chain ID `968` (`https://rpc.bohr.life`) |
 
 ---
 
@@ -82,10 +82,10 @@ NEXT_PUBLIC_PROJECT_ID=your_reown_project_id
 # Deployed Smart Contract Address
 NEXT_PUBLIC_BNS_CONTRACT_ADDRESS=0x0b1a2cdc35bf786c1cb17536667dfbf7d03d5a77
 
-# Botchain Testnet Config
-NEXT_PUBLIC_CHAIN_ID=968
-NEXT_PUBLIC_RPC_URL=https://rpc.bohr.life
-NEXT_PUBLIC_EXPLORER_URL=https://scan.bohr.life
+# BOT Chain Mainnet Config
+NEXT_PUBLIC_CHAIN_ID=677
+NEXT_PUBLIC_RPC_URL=https://rpc.botchain.ai
+NEXT_PUBLIC_EXPLORER_URL=https://scan.botchain.ai
 ```
 
 ### 4. Run Development Server
@@ -114,10 +114,17 @@ The primary smart contract is located at [`contracts/BotNameService.sol`](./cont
 - `createSubdomain(string parentName, string subLabel, address targetAddress)`: Deploys a new subdomain.
 - `resolve(string name)`: Returns the target address, owner, and expiry status.
 
-### Redeploying the Contract
-If you want to redeploy a new instance to Botchain Testnet:
+### Contract Scripts
+Manage your deployment on BOT Chain Mainnet:
 ```bash
-node scripts/deploy.js
+# Set promotional pricing to 0 BOT:
+node scripts/setPrices.js free
+
+# Restore standard tier pricing:
+node scripts/setPrices.js restore
+
+# Check current on-chain status:
+node scripts/setPrices.js status
 ```
 
 ---
