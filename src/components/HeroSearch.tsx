@@ -41,7 +41,7 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
     address: BNS_CONTRACT_ADDRESS,
     abi: BNS_ABI,
     functionName: 'getPrice',
-    args: [cleanName, 1n],
+    args: [cleanName, BigInt(1)],
     query: {
       enabled: isContractValid && cleanName.length > 0,
     },
