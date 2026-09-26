@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Search, Sparkles, CheckCircle, XCircle, ArrowRight, ShieldCheck, Zap, Coins } from 'lucide-react';
+import { Search, Sparkles, CheckCircle, XCircle, ArrowRight, ShieldCheck, Zap, Coins, ExternalLink } from 'lucide-react';
 import { useAccount, useReadContract } from 'wagmi';
 import { BNS_CONTRACT_ADDRESS, BNS_ABI } from '@/contracts/bnsContract';
 import { formatEther } from 'viem';
@@ -66,10 +66,35 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
   return (
     <div className="relative pt-12 pb-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center z-10">
       
-      {/* Network Badge */}
-      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-6 animate-pulse-glow">
-        <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-        <span>BOT Chain Mainnet (Chain ID: 677)</span>
+      {/* Network & Explorer Badges */}
+      <div className="flex flex-wrap items-center justify-center gap-2.5 mb-6">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-semibold uppercase tracking-wider animate-pulse-glow">
+          <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+          <span>BOT Chain Mainnet (677)</span>
+        </div>
+
+        <a
+          href="https://scan.botchain.ai"
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 text-xs font-semibold tracking-wide transition-all shadow-sm group"
+        >
+          <span>Mainnet Explorer</span>
+          <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        </a>
+
+        {isContractValid && (
+          <a
+            href={`https://scan.botchain.ai/address/${BNS_CONTRACT_ADDRESS}`}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 text-xs font-semibold tracking-wide transition-all shadow-sm group"
+          >
+            <ShieldCheck className="w-3.5 h-3.5 text-purple-400" />
+            <span>Contract: {BNS_CONTRACT_ADDRESS.slice(0, 6)}...{BNS_CONTRACT_ADDRESS.slice(-4)}</span>
+            <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+        )}
       </div>
 
       {/* Hero Headline */}

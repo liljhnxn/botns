@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useAccount, useChainId } from 'wagmi';
 import { botchainMainnet } from '@/config/chains';
+import { ExternalLink } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: 'search' | 'dashboard' | 'inspector' | 'contract';
@@ -101,8 +102,19 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
           </nav>
         </div>
 
-        {/* Network Badge & Wallet Connect */}
+        {/* Network Badge & Mainnet Explorer & Wallet Connect */}
         <div className="flex items-center gap-3">
+          <a
+            href="https://scan.botchain.ai"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 text-xs font-semibold transition-all shadow-sm group"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+            <span>Mainnet Explorer</span>
+            <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+
           {mounted && (
             <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border-color)] bg-white/5 text-xs font-medium">
               <span className={`w-2 h-2 rounded-full ${isCorrectNetwork ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]' : 'bg-amber-400'}`}></span>

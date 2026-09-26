@@ -72,7 +72,7 @@ export default function Home() {
             <span>Mainnet Chain ID: 677</span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <a
               href="https://rpc.botchain.ai"
               target="_blank"
@@ -88,7 +88,16 @@ export default function Home() {
               rel="noreferrer"
               className="hover:text-cyan-400 flex items-center gap-1 transition-colors"
             >
-              <span>BotScan Explorer</span>
+              <span>Mainnet Explorer</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+            <a
+              href="https://scan.botchain.ai/address/0x2ce45ff1847273f0fd11714744c4f238d004e026"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-cyan-400 flex items-center gap-1 transition-colors"
+            >
+              <span>Verified Contract</span>
               <ExternalLink className="w-3 h-3" />
             </a>
           </div>
