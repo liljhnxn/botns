@@ -22,6 +22,7 @@ Everything is stored **100% on-chain**, eliminating the need for centralized dat
 | :--- | :--- |
 | **Network Name** | BOT Chain Mainnet |
 | **Chain ID** | `677` |
+| **Official Website** | [https://botchain.ai](https://botchain.ai) |
 | **RPC Endpoint** | `https://rpc.botchain.ai` |
 | **Native Token** | `BOT` (18 Decimals) |
 | **Total Supply** | `150 Million BOT` |
@@ -80,7 +81,7 @@ Create a `.env.local` file in the root directory:
 NEXT_PUBLIC_PROJECT_ID=your_reown_project_id
 
 # Deployed Smart Contract Address
-NEXT_PUBLIC_BNS_CONTRACT_ADDRESS=0x0b1a2cdc35bf786c1cb17536667dfbf7d03d5a77
+NEXT_PUBLIC_BNS_CONTRACT_ADDRESS=0x2ce45ff1847273f0fd11714744c4f238d004e026
 
 # BOT Chain Mainnet Config
 NEXT_PUBLIC_CHAIN_ID=677

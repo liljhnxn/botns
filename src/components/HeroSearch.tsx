@@ -68,9 +68,20 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
       
       {/* Network & Explorer Badges */}
       <div className="flex flex-wrap items-center justify-center gap-2.5 mb-6">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-semibold uppercase tracking-wider animate-pulse-glow">
-          <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-          <span>BOT Chain Mainnet (677)</span>
+        <a
+          href="https://botchain.ai"
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-cyan-500/40 bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 text-xs font-semibold tracking-wide transition-all shadow-sm group"
+          title="BOT Chain Official Website"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+          <span>BOT Chain Official: botchain.ai</span>
+          <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        </a>
+
+        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-700 bg-slate-800/60 text-slate-300 text-xs font-semibold">
+          <span>Mainnet (Chain 677)</span>
         </div>
 
         <a
@@ -100,11 +111,23 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
       {/* Hero Headline */}
       <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6">
         Your Web3 Identity on <br />
-        <span className="text-gradient">Botchain Network</span>
+        <a
+          href="https://botchain.ai"
+          target="_blank"
+          rel="noreferrer"
+          className="text-gradient hover:opacity-90 transition-opacity"
+          title="Visit BOT Chain at botchain.ai"
+        >
+          Botchain Network
+        </a>
       </h1>
 
       <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-        Claim your <span className="text-cyan-400 font-semibold">.bot</span> domain name. Replace complex hexadecimal addresses with simple, memorable decentralized names.
+        Claim your <span className="text-cyan-400 font-semibold">.bot</span> domain name on{' '}
+        <a href="https://botchain.ai" target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline font-medium">
+          botchain.ai
+        </a>
+        . Replace complex hexadecimal addresses with simple, memorable decentralized names.
       </p>
 
       {/* Main Search Box */}

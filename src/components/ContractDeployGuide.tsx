@@ -64,6 +64,12 @@ export default function ContractDeployGuide() {
             <span className="font-mono text-cyan-400 font-bold">150 Million</span>
           </div>
           <div className="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex justify-between items-center sm:col-span-2">
+            <span className="text-slate-400">Official Website:</span>
+            <a href="https://botchain.ai" target="_blank" rel="noreferrer" className="font-mono text-cyan-400 hover:underline">
+              https://botchain.ai
+            </a>
+          </div>
+          <div className="p-3 rounded-lg bg-slate-900/90 border border-slate-800 flex justify-between items-center sm:col-span-2">
             <span className="text-slate-400">Explorer URL:</span>
             <a href="https://scan.botchain.ai" target="_blank" rel="noreferrer" className="font-mono text-cyan-400 hover:underline">
               https://scan.botchain.ai

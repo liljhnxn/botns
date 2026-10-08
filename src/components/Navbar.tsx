@@ -102,8 +102,19 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
           </nav>
         </div>
 
-        {/* Network Badge & Mainnet Explorer & Wallet Connect */}
-        <div className="flex items-center gap-3">
+        {/* Official Botchain Link & Mainnet Explorer & Wallet Connect */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          <a
+            href="https://botchain.ai"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 text-xs font-semibold transition-all shadow-sm group"
+            title="Official BOT Chain Website"
+          >
+            <span>botchain.ai</span>
+            <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+
           <a
             href="https://scan.botchain.ai"
             target="_blank"

@@ -74,6 +74,15 @@ export default function Home() {
 
           <div className="flex flex-wrap items-center gap-4">
             <a
+              href="https://botchain.ai"
+              target="_blank"
+              rel="noreferrer"
+              className="text-cyan-400 font-semibold hover:text-cyan-300 flex items-center gap-1 transition-colors"
+            >
+              <span>BOT Chain (botchain.ai)</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+            <a
               href="https://rpc.botchain.ai"
               target="_blank"
               rel="noreferrer"
@@ -103,7 +112,15 @@ export default function Home() {
           </div>
 
           <div className="text-slate-500 text-[11px]">
-            Decentralized Web3 Identity • Built on Botchain EVM
+            Decentralized Web3 Identity • Built on{' '}
+            <a
+              href="https://botchain.ai"
+              target="_blank"
+              rel="noreferrer"
+              className="text-cyan-400 hover:underline"
+            >
+              BOT Chain (botchain.ai)
+            </a>
           </div>
         </div>
       </footer>
