@@ -116,9 +116,16 @@ To fulfill the **KPI 1 Twitter** requirement, below is the complete, high-impact
 ---
 
 ### Live Tweet Publication Submission:
-*(Copy and paste your published tweet URLs below upon posting):*
-- **Announcement Tweet Link:** `[Insert Live Tweet 1 URL]`
-- **Thread Link:** `[Insert Live Tweet Thread URL]`
+- **Official Tweet URL:** [https://x.com/BotNSvub/status/2108098896081608941](https://x.com/BotNSvub/status/2108098896081608941)
+- **Twitter / X Handle:** `@BotNSvub`
+- **Status:** Published & Publicly Accessible on X
+- **Published Tweet Copy:**
+  > Excited to announce that BotNS is officially live on @Botchain_AI Mainnet!
+  >
+  > Decentralized .bot domain names and Web3 identity for users and autonomous AI agents.
+  >
+  > Check out the announcement:
+  > https://telegra.ph/BotNS-Launches-on-BOT-Chain-Mainnet-Decentralized-bot-Domain-Names-and-Web3-Identity-for-Autonomous-AI-Agents-10-08
 
 ---
 
