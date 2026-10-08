@@ -196,8 +196,10 @@ BotNS is the primary naming and identity protocol on BOT Chain, dedicated to ena
 ***
 
 ### Live PR Article Submission:
-*(Copy and paste your published PR / Article URL below upon posting):*
-- **Published Article Link (Mirror/Medium/Substack):** `[Insert Live PR Article URL]`
+- **Published Press Release URL:** [https://telegra.ph/BotNS-Launches-on-BOT-Chain-Mainnet-Decentralized-bot-Domain-Names-and-Web3-Identity-for-Autonomous-AI-Agents-10-08](https://telegra.ph/BotNS-Launches-on-BOT-Chain-Mainnet-Decentralized-bot-Domain-Names-and-Web3-Identity-for-Autonomous-AI-Agents-10-08)
+- **Article Title:** *BotNS Launches on BOT Chain Mainnet: Decentralized .bot Domain Names and Web3 Identity for Autonomous AI Agents*
+- **Publisher / Byline:** BotNS Team
+- **Status:** Published & Publicly Accessible on Telegraph
 
 ---
 
