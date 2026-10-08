@@ -38,6 +38,7 @@
   5. **Repository Documentation (`README.md`):** Updated the main repository README table with the official `https://botchain.ai` link and verified parameters.
 
 ### Live Links for Verification:
+- **Live Rectified DApp:** [https://botns-h9gv.vercel.app](https://botns-h9gv.vercel.app)
 - **Official Chain Website:** [https://botchain.ai](https://botchain.ai)
 - **Mainnet Explorer:** [https://scan.botchain.ai](https://scan.botchain.ai)
 - **Verified Smart Contract:** [0x2ce45ff1847273f0fd11714744c4f238d004e026](https://scan.botchain.ai/address/0x2ce45ff1847273f0fd11714744c4f238d004e026)
