@@ -77,8 +77,13 @@ export default function Home() {
               href="https://botchain.ai"
               target="_blank"
               rel="noreferrer"
-              className="text-cyan-400 font-semibold hover:text-cyan-300 flex items-center gap-1 transition-colors"
+              className="text-cyan-400 font-semibold hover:text-cyan-300 flex items-center gap-1.5 transition-colors"
             >
+              <img
+                src="/botchain-logo.jpg"
+                alt="BOT Chain"
+                className="w-3.5 h-3.5 rounded-full object-cover ring-1 ring-cyan-400/40"
+              />
               <span>BOT Chain (botchain.ai)</span>
               <ExternalLink className="w-3 h-3" />
             </a>
@@ -95,8 +100,13 @@ export default function Home() {
               href="https://scan.botchain.ai"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-cyan-400 flex items-center gap-1 transition-colors"
+              className="hover:text-cyan-400 flex items-center gap-1.5 transition-colors"
             >
+              <img
+                src="/botchain-logo.jpg"
+                alt="BOT Chain Explorer"
+                className="w-3.5 h-3.5 rounded-full object-cover ring-1 ring-cyan-400/40"
+              />
               <span>Mainnet Explorer</span>
               <ExternalLink className="w-3 h-3" />
             </a>

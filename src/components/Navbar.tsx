@@ -108,9 +108,14 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
             href="https://botchain.ai"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 text-xs font-semibold transition-all shadow-sm group"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 text-xs font-semibold transition-all shadow-sm group"
             title="Official BOT Chain Website"
           >
+            <img
+              src="/botchain-logo.jpg"
+              alt="BOT Chain"
+              className="w-4 h-4 rounded-full object-cover ring-1 ring-emerald-400/40"
+            />
             <span>botchain.ai</span>
             <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>
@@ -121,7 +126,11 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
             rel="noreferrer"
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 text-xs font-semibold transition-all shadow-sm group"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+            <img
+              src="/botchain-logo.jpg"
+              alt="BOT Chain Explorer"
+              className="w-4 h-4 rounded-full object-cover ring-1 ring-cyan-400/40"
+            />
             <span>Mainnet Explorer</span>
             <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>

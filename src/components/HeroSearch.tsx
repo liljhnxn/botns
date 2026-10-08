@@ -72,10 +72,14 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
           href="https://botchain.ai"
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-cyan-500/40 bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 text-xs font-semibold tracking-wide transition-all shadow-sm group"
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/40 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 text-xs font-semibold tracking-wide transition-all shadow-sm group"
           title="BOT Chain Official Website"
         >
-          <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+          <img
+            src="/botchain-logo.jpg"
+            alt="BOT Chain Logo"
+            className="w-4 h-4 rounded-full object-cover ring-1 ring-emerald-400/50"
+          />
           <span>BOT Chain Official: botchain.ai</span>
           <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </a>
@@ -88,8 +92,13 @@ export default function HeroSearch({ onSelectDomain }: HeroSearchProps) {
           href="https://scan.botchain.ai"
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 text-xs font-semibold tracking-wide transition-all shadow-sm group"
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 text-xs font-semibold tracking-wide transition-all shadow-sm group"
         >
+          <img
+            src="/botchain-logo.jpg"
+            alt="BOT Chain Explorer"
+            className="w-4 h-4 rounded-full object-cover ring-1 ring-cyan-400/50"
+          />
           <span>Mainnet Explorer</span>
           <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </a>
